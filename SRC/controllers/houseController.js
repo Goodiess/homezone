@@ -21,7 +21,7 @@ export const createPost = async (req, res) => {
     const postedBy = req.house._id;
 
     if (!text) {
-      return res.status(400).json({ error: "Text field is required: 🐸🐸🐸🐸🐸" });
+      return res.status(400).json({ error: "Text field is required: "});
     }
 
     const house = await House.findById(postedBy);
@@ -48,11 +48,12 @@ export const createPost = async (req, res) => {
       
     });
 
-    await newPost.save();
-    res.status(201).json({ message: 'Post created successfully: 🐸🐸🐸🐸🐸', newPost });
-    console.log('Post created successfully', newPost);
+    await newHouse.save();
+    res.status(201).json({ message: 'Post created successfully: ', newHouse });
+    console.log('Post created successfully', newHouse);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
     console.error('Internal server error:', error);
   }
 };
+

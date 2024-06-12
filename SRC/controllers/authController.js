@@ -1,8 +1,8 @@
 import cryptoHash from 'crypto';
 import Agent from '../models/agentModel.js';
-import { signUpValidator, signInValidator } from '../validators/auth.validator.js';
+import { signUpValidator, signInValidator } from '../validator/auth.validator.js';
 import { formatZodError } from '../utils/errorMessage.js';
-import generateTokenAndSetCookie from '../utils/generateTokenAndSetCookie.js';
+import generateTokenAndSetCookie from '../utils/generateTokensAndSetCookies.js';
 
 function hashValue(value) {
     const hash = cryptoHash.createHash('sha256');
@@ -20,20 +20,20 @@ export const signUp = async (req, res) => {
         return res.status(400).json(formatZodError(registerResults.error.issues))
     }
     try {
-        const {userName, phoneNumber, email} = req.body
-        const user = await User.findOne({$or:[{userName},{email},{phoneNumber}]})
-        if (user) {
-            res.status(409).json({messaage:'User already exists', user})
+        const {email} = req.body
+        const agent = await Agent.findOne({email})
+        if (agent) {
+            res.status(409).json({messaage:'Agent already exists', agent})
         } else {
             const {
-                name,
-                userName,
+                // name,
+                // AgentName,
+                email,
                 password,
                 confirmPassword,
-                email,
-                phoneNumber,
-                bio,
-                gender
+                // phoneNumber,
+                // bio,
+                // gender
             } = req.body
 
             if (password !== confirmPassword) {
@@ -41,18 +41,18 @@ export const signUp = async (req, res) => {
              }   
              const encryption = hashValue(password)
              
-            const newUser = new User({
-                name,
-                userName,
+            const newAgent = new Agent({
+                // name,
+                // AgentName,
                 password: encryption,
                 email,
-                phoneNumber,
-                bio,
-                gender
+                // phoneNumber,
+                // bio,
+                // gender
             })
-            await newUser.save()
-            res.status(200).json({message: 'User registered succesfully',newUser})
-            console.log('User registered succesfully',newUser);
+            await newAgent.save()
+            res.status(200).json({message: 'Agent registered succesfully',newAgent})
+            console.log('Agent registered succesfully',newAgent);
         }
     } catch (error) {
         res.status(500).json({message: error.message})
@@ -66,18 +66,18 @@ export const signIn = async (req, res, next) => {
         return res.status(400).json(formatZodError(loginResults.error.issues))
     } try {
         const {email, password} = req.body
-        const user = await User.findOne({email})
-        if (!user) {
-            return res.status(400).json({message:'User with email not found'})
+        const agent = await Agent.findOne({email})
+        if (!agent) {
+            return res.status(400).json({message:'Agent with email not found'})
         }
-        const comparePass = comparePasswords(password,user.password)
+        const comparePass = comparePasswords(password,agent.password)
         if(!comparePass) {
            return res.status(400).json({message:'Password is incorrect'})
         }
-        const accessToken = generateTokenAndSetCookie(user._id, res)
+        const accessToken = generateTokenAndSetCookie(agent._id, res)
 
-        res.status(200).json({message:'User Login successful', accessToken})
-        console.log('User Login successful', accessToken);
+        res.status(200).json({message:'Agent Login successful', accessToken})
+        console.log('Agent Login successful', accessToken);
     } catch (error) {
         res.status(500).json({message: error.message})
         console.log('INTERNAL SERVER ERROR',error.message)
@@ -87,3 +87,12 @@ export const signIn = async (req, res, next) => {
 export const logout = async (req, res, next) => {
 
 }
+
+// A .-
+// I ..
+// R .-.
+// D -..
+// R .-.
+// O ---
+// P .--.
+

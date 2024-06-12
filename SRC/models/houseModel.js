@@ -1,4 +1,5 @@
 import express from "express";
+import { number } from "zod";
 
 const houseSchema = mongoose.Schema({
     postedBy:{
@@ -17,7 +18,7 @@ const houseSchema = mongoose.Schema({
     },
 
     price:{
-      type: int,
+      type: number,
       required: true
     },
 
