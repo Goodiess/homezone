@@ -75,6 +75,7 @@ export const signIn = async (req, res, next) => {
            return res.status(400).json({message:'Password is incorrect'})
         }
         const accessToken = generateTokenAndSetCookie(agent._id, res)
+        
 
         res.status(200).json({message:'Agent Login successful', accessToken})
         console.log('Agent Login successful', accessToken);
