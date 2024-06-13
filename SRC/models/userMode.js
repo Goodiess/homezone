@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const agentSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   name:{
     type: String,
     required: true
@@ -28,5 +28,5 @@ const agentSchema = mongoose.Schema({
 
 });
 
-const client = mongoose.model('client', agentSchema)
+const client = mongoose.model('client', userSchema)
 export default client;
