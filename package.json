@@ -12,7 +12,6 @@
   "keywords": [],
   "author": "Goodies",
   "license": "ISC",
-  "type":"module",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cloudinary": "^2.2.0",
