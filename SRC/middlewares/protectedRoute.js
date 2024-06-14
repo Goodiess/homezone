@@ -1,7 +1,8 @@
-import User from "../models/userMode.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-// import commentModel from "../models/commentModel.js";
+import Agent from "../models/agentModel.js";
+import Client from "../models/userMode.js";
+
 dotenv.config();
 
 const protectRoute = async (req, res, next) => {
@@ -32,18 +33,24 @@ const protectRoute = async (req, res, next) => {
 
     console.log("Decoded token:", decoded);
 
-    const user = await User.findById(decoded.userId).select("-password");
+    let user;
+    if (decoded.userType === 'type1') {  // Assuming `userType` in the token indicates which model to use
+      user = await Agent.findById(decoded.userId).select("-password");
+    } else if (decoded.userType === 'type2') {
+      user = await Client.findById(decoded.userId).select("-password");
+    } else {
+      throw new Error("Invalid user type.");
+    }
 
     if (!user) {
-      throw new Error("User not found.");
+      return res.status(404).json({ message: "User not found." });
     }
 
     req.user = user;
-
     next();
   } catch (err) {
-    res.status(500).json({ message: err.message });
     console.error("Error in protectRoute:", err);
+    res.status(500).json({ message: err.message });
   }
 };
 

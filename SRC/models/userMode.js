@@ -14,18 +14,18 @@ const userSchema = mongoose.Schema({
     required: true
   },
 
-  comfirmPassword:{
-    type: String,
-    required: true
-  },
-
   phoneNumber:{
     type: String,
     rquired: true
   },
 
+  role: {
+    type: String,
+    default: "Client"
+  }
+
 
 });
 
-const client = mongoose.model('client', userSchema)
-export default client;
+const Client = mongoose.model('Client', userSchema)
+export default Client;

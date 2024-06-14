@@ -7,7 +7,7 @@ const comment = mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // 'User' is the name of the user model
+    ref: "User",
     required: true,
   },
   house: {

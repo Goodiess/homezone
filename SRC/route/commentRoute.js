@@ -3,7 +3,7 @@ import { createComment, getCommentById, updateComment, deleteComment } from '../
 import protectRoute from '../middlewares/protectedRoute.js';
 const router = express.Router();
 
-router.post('/',protectRoute, createComment);
+router.post('/', createComment);
 router.get('/:id',protectRoute, getCommentById);
 router.put('/:id',protectRoute, updateComment);
 router.delete('/:id',protectRoute, deleteComment);

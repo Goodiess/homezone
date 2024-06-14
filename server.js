@@ -4,8 +4,6 @@ import connectDB from './SRC/DB/database.js'
 import cors from 'cors'
 import dotenv from "dotenv";
 import router from "./SRC/route/indexroute.js";
-import  commentRoutes  from "./SRC/route/commentRoute.js";
-import commentSchema from "./SRC/models/commentModel.js";
 
 //INITIALIZING THE DOTENV METHOD
 dotenv.config();
@@ -17,12 +15,7 @@ const app = express();
 const PORT  = process.env.PORT || 3030
 
 
-// Using the express functions
 app.use(express.json());
-
-// app.use('/comments', commentRoutes);
-
-// app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 app.use(cors({origin:"*"}))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
