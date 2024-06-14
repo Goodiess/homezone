@@ -1,6 +1,7 @@
-import User from "../models/user.model.js";
+import User from "../models/userMode.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+// import commentModel from "../models/commentModel.js";
 dotenv.config();
 
 const protectRoute = async (req, res, next) => {

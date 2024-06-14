@@ -8,4 +8,4 @@ router.use('/auth', authRoute)
 // router.use('/user', houseRoute)
 // router.use('/post', postRoute)
 
-export default router;
+export default router; 

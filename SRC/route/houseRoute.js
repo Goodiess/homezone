@@ -1,4 +1,3 @@
-import express from "express";
 import { createPost, deletePost, getAllPosts, getSinglePost } from "../../controllers/houseController.js";
 import protectRoute from "../../middlewares/protectRoute.js";
 import { getAllHouses, getSingleHouse } from "../controllers/user.controller.js";

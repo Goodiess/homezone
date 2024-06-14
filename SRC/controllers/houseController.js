@@ -31,7 +31,7 @@ export const createPost = async (req, res) => {
 
     const maxlength = 1000;
     if (text.length > maxlength) {
-      return res.status(400).json({ error: `Text should not exceed ${maxlength} characters 🐸🐸🐸🐸 `});
+      return res.status(400).json({ error: `Text should not exceed ${maxlength} characters`});
     }
 
     if (img) {

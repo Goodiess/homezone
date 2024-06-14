@@ -4,6 +4,7 @@ import { signUp,signIn } from "../../controllers/authController.js";
 
 router.post("/register",signUp)
 router.post("/login", signIn)
+router.post("/")
 
 export default router;
 

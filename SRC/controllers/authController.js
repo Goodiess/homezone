@@ -77,7 +77,7 @@ export const signIn = async (req, res, next) => {
         const accessToken = generateTokenAndSetCookie(agent._id, res)
         
 
-        res.status(200).json({message:'Agent Login successful', accessToken})
+        res.status(200).json({message:'Agent Login successful', accessToken,agent})
         console.log('Agent Login successful', accessToken);
     } catch (error) {
         res.status(500).json({message: error.message})
