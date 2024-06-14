@@ -10,7 +10,6 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "types": "module",
   "author": "Goodies",
   "license": "ISC",
   "dependencies": {
